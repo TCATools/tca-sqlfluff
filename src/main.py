@@ -14,10 +14,10 @@ class Invocation(object):
     def get_dialect(self, param):
         try:
             rule_json = json.loads(param)
-            return rule_json['dialect']
         except Exception as e:
             print("参数设置错误，采用默认方言" + e)
             return 'ansi'
+        return rule_json['dialect']
 
     def scan(self, scan_cmd, sql_json):
         issues = []
