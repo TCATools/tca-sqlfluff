@@ -21,6 +21,7 @@ class Invocation(object):
 
     def scan(self, scan_cmd, sql_json):
         issues = []
+        print(scan_cmd)
         process = subprocess.Popen(scan_cmd, shell=False)
         process.wait()
         try:
@@ -35,7 +36,6 @@ class Invocation(object):
                     description = issue['description']
                     issues.append({"path": filepath, "rule": code, "msg": description, "line": line_no, "column": line_pso})
         except Exception as e:
-            print("异常 : ", scan_cmd)
             print(f"解析结果异常 : {e}")
             return []
         return issues
