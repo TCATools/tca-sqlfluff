@@ -42,7 +42,7 @@ class Invocation(object):
 
     def run(self):
         incr_scan = self.params["incr_scan"]
-        work_dir = self.params.work_dir
+        work_dir = os.getcwd()
         diff_env = os.environ.get("DIFF_FILES", None)
         scan_files_env = os.getenv("SCAN_FILES")
         to_scan = []
