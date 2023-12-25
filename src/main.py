@@ -15,8 +15,8 @@ class Invocation(object):
         try:
             rule_json = json.loads(param)
         except Exception as e:
-            print("参数设置错误，采用默认方言" + e)
-            return 'ansi'
+            print(f"参数设置错误，采用默认方言 : {e}")
+            return "ansi"
         return rule_json['dialect']
 
     def scan(self, scan_cmd, sql_json):
@@ -36,7 +36,7 @@ class Invocation(object):
                     issues.append({"path": filepath, "rule": code, "msg": description, "line": line_no, "column": line_pso})
         except Exception as e:
             print("异常 : ", scan_cmd)
-            print("解析结果异常" + e)
+            print(f"解析结果异常 : {e}")
             return []
         return issues
 
@@ -73,6 +73,7 @@ class Invocation(object):
                     'src/sqlfluff',
                     'lint',
                     '--dialect', '%s' % self.get_dialect(rule_params),
+                    '--rules', '%s' % rule_name,
                     '--format', 'json',
                     '--write-output', sql_json,
                 ]
